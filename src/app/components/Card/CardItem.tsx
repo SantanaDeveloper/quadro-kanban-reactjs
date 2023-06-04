@@ -22,10 +22,11 @@ type TaskProps = {
     }[];
   };
   index: number;
+  droptask: (id: string) => void
 };
 
-function CardItem({ data, index }: TaskProps) {
-  const { label, title, messages, attachments, members } = data;
+function CardItem({ data, droptask, index }: TaskProps) {
+  const { id ,label, title, messages, attachments, members } = data;
 
   return (
     <Draggable index={index} draggableId={data.id.toString()}>
@@ -41,11 +42,11 @@ function CardItem({ data, index }: TaskProps) {
               {label}
             </label>
             <div className="group relative flex justify-center">
-              <button className="">
+              <button onClick={() => droptask(id)}>
               <TrashIcon className="w-5 h-5 text-gray-500" />
               </button>
-              <span className="absolute top-10 scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
-                ✨ You hover me!
+              <span className="absolute min-w-max top-8 scale-0 transition-all rounded bg-purple-600 p-2 text-xs text-white group-hover:scale-100">
+                Excluir
               </span>
             </div>
           </div>

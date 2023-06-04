@@ -5,7 +5,7 @@
             {
                 "id": "b1608c46-6368-4407-8834-fcc806113701",
                 "label": "FrontEnd",
-                "title": "Criar tela de login.",
+                "title": "Crie um formulário de registro de usuário com os campos nome, e-mail e senha",
                 "messages": [
                     "Oi"
                 ],
@@ -25,7 +25,7 @@
             {
                 "id": "b1608c46-6368-4407-8834-fcc806113702",
                 "label": "BackEnd",
-                "title": "Criar tela de login.",
+                "title": "Implemente um sistema de autenticação para os usuários",
                 "messages": [
                     "Oi"
                 ],
@@ -45,7 +45,7 @@
             {
                 "id": "b1608c46-6368-4407-8834-fcc806113703",
                 "label": "Infra",
-                "title": "Criar tela de login.",
+                "title": "Configure um servidor de banco de dados MySQL",
                 "messages": [
                     "Oi"
                 ],
