@@ -9,7 +9,8 @@ const nextConfig = {
                 pathname: '/u/**'
             }
         ]
-    }
+    },
+    reactStrictMode: false
 }
 
 module.exports = nextConfig

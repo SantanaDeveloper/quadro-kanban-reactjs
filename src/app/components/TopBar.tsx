@@ -18,7 +18,7 @@ const TopBar = () => {
                     <h3 className="font-bold mr-3">Santana Developer</h3>
                     <Image src="https://avatars.githubusercontent.com/u/48597174?v=4"
                     width="36" height="36" style={{objectFit: 'cover'}} 
-                    className=" rounded-full " alt={''}/>
+                    className="rounded-full " alt={''}/>
                 </div>
             </div>
         </div>

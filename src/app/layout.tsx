@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className='min-w-full min-h-screen bg-gray-200'>
+      <body className='min-w-full min-h-screen bg-purple-100'>
         <TopBar />
         <Sidebar />
           {children}
