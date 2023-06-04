@@ -23,6 +23,19 @@ export default function Home() {
   const [selectedBoard, setSelectedBoard] = useState(0);
   const [boardData, setBoardData] = useState(MockQuadros);
 
+  useEffect(() => {
+    // Perform localStorage action
+    const boards = localStorage.getItem('@stellarjetz_boards')
+    if(boards){
+      console.log("Entrou")
+      setBoardData(JSON.parse(boards))
+    } else {
+      localStorage.setItem('@stellarjetz_boards', "")
+      console.log("No Entrou")
+
+    }
+  }, [])
+
   //State do modal de inclusão de tasks
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = (data: any) => {
@@ -79,9 +92,16 @@ export default function Home() {
     setBoardData(newBoardData);
   };
 
-  function handleClick() {
-    console.log("increment like count");
-  }
+  const dropTask = (id: string) => {
+    const selectedTask = id;
+    let newBoardData = boardData;
+    newBoardData = newBoardData.map((board) => ({
+      ...board,
+      items: board.items.filter((task) => task.id !== selectedTask),
+    }));
+    setBoardData(newBoardData);
+  };
+
   return (
     <main className="pl-32 pt-16">
       <div className="p-10">
@@ -90,7 +110,7 @@ export default function Home() {
             <h4 className="text-4xl font-bold text-gray-600">
               Quadro StellarJetz
             </h4>
-            <button onClick={handleClick} className="w-9 h-9 ml-5">
+            <button className="w-9 h-9 ml-5">
               <ArrowsUpDownIcon className="text-gray-500 rounded-full p-2 bg-white shadow-xl" />
             </button>
           </div>
@@ -148,6 +168,7 @@ export default function Home() {
                             board.items.map((task, index) => {
                               return (
                                 <CardItem
+                                  droptask={dropTask}
                                   data={task}
                                   index={index}
                                   key={task.id}
