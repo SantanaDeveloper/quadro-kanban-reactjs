@@ -119,16 +119,13 @@ export default function Home() {
   };
 
   return (
-    <main className="pl-12 md:pl-32 pt-10 md:pt-16">
-      <div className="pt-10 pb-0 px-7">
+    <main className="md:pl-32 ">
+      <div className="md:pt-10 pb-0 px-5">
         <div className="flex justify-between mb-4">
           <div className="flex flex-row items-center">
-            <h4 className="text-lg md:text-4xl w-6/12 md:w-max font-bold text-gray-600">
+            <h4 className="text-lg md:text-4xl w-full md:w-max font-bold text-gray-600">
               Quadro StellarJetz
             </h4>
-            <button className="w-9 h-9 ml-3 md:ml-5">
-              <ArrowsUpDownIcon className="text-gray-500 rounded-full p-2 bg-white shadow-xl" />
-            </button>
           </div>
 
           <div>
@@ -160,7 +157,7 @@ export default function Home() {
         {/* Colunas Do Quadro */}
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex overflow-x-auto overflow-y-hidden h-[calc(100vh-160px)] gap-5">
+            <div className="flex overflow-x-auto overflow-y-hidden pb-3 gap-5">
               {boardData.map((board, Bindex) => {
                 return (
                   <div
@@ -187,8 +184,7 @@ export default function Home() {
                             </h4>
 
                             <div
-                              className="overflow-y-auto overflow-x-hidden h-auto"
-                              style={{ maxHeight: "calc(100vh - 290px)" }}
+                              className="overflow-y-auto overflow-x-hidden h-[58vh] md:h-[70vh] "
                             >
                               {board.items.length > 0 &&
                                 board.items.map((task, index) => {

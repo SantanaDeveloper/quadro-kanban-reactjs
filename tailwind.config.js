@@ -8,13 +8,19 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        'stellar-primary-color': '#6F4199'
+        'stellar-primary-color': '#320b4a'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      maxWidth:{
+        'initial': 'unset',
+      },
+      textColor: {
+        'stellar-primary-color': '#320b4a'
+      }
     },
   },
   plugins: [
