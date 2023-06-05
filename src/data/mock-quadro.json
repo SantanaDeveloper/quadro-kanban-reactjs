@@ -21,43 +21,11 @@
     },
     {
         "boardName": "A Fazer",
-        "items": [
-            {
-                "id": "b1608c46-6368-4407-8834-fcc806113702",
-                "label": "BackEnd",
-                "title": "Implemente um sistema de autenticação para os usuários",
-                "messages": [
-                    "Oi"
-                ],
-                "attachments": 3,
-                "members": [
-                    {
-                        "avatar": "https://avatars.githubusercontent.com/u/48597174?v=4",
-                        "name": "João Paulo Santana"
-                    }
-                ]
-            }
-        ]
+        "items": []
     },
     {
         "boardName": "Em Andamento",
-        "items": [
-            {
-                "id": "b1608c46-6368-4407-8834-fcc806113703",
-                "label": "Infra",
-                "title": "Configure um servidor de banco de dados MySQL",
-                "messages": [
-                    "Oi"
-                ],
-                "attachments": 3,
-                "members": [
-                    {
-                        "avatar": "https://avatars.githubusercontent.com/u/48597174?v=4",
-                        "name": "João Paulo Santana"
-                    }
-                ]
-            }
-        ]
+        "items": []
     },
     {
         "boardName": "Concluído",

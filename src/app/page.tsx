@@ -14,6 +14,7 @@ import MockQuadros from "../data/mock-quadro.json";
 import MockUsers from "../data/mock-users.json";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Board } from "./types/types";
 
 export default function Home() {
   const [ready, setReady] = useState(false);
@@ -25,11 +26,9 @@ export default function Home() {
     // Perform localStorage action
     const boards = localStorage.getItem("@stellarjetz_boards");
     if (boards) {
-      console.log("Entrou");
       setBoardData(JSON.parse(boards));
     } else {
-      localStorage.setItem("@stellarjetz_boards", "");
-      console.log("No Entrou");
+      localStorage.setItem("@stellarjetz_boards", JSON.stringify(MockQuadros));
     }
   }, []);
 
@@ -44,15 +43,19 @@ export default function Home() {
     const item = {
       id: createGuidId(),
       title: data.titulo,
-      label: "Novo",
+      label: data.etiqueta,
       messages: [],
       attachments: 0,
       members: [],
     };
+    let oldBoard: Board[] = JSON.parse(
+      localStorage.getItem("@stellarjetz_boards") ?? ""
+    );
+    oldBoard[selectedBoard].items.push(item);
 
-    let newBoardData = boardData;
+    let newBoardData = oldBoard;
 
-    newBoardData[selectedBoard].items.push(item);
+    localStorage.setItem("@stellarjetz_boards", JSON.stringify(newBoardData));
     setBoardData(newBoardData);
     setShowModal(false);
     reset();
@@ -81,7 +84,9 @@ export default function Home() {
    */
   const onDragEnd = (dragEvent: any) => {
     if (!dragEvent.destination) return;
-    let newBoardData = boardData;
+    let newBoardData: Board[] = JSON.parse(
+      localStorage.getItem("@stellarjetz_boards") ?? ""
+    );
     var dragItem =
       newBoardData[parseInt(dragEvent.source.droppableId)].items[
         dragEvent.source.index
@@ -95,28 +100,33 @@ export default function Home() {
       0,
       dragItem
     );
+    localStorage.setItem("@stellarjetz_boards", JSON.stringify(newBoardData));
     setBoardData(newBoardData);
   };
 
   const dropTask = (id: string) => {
     const selectedTask = id;
-    let newBoardData = boardData;
+    let newBoardData: Board[] = JSON.parse(
+      localStorage.getItem("@stellarjetz_boards") ?? ""
+    );
     newBoardData = newBoardData.map((board) => ({
       ...board,
       items: board.items.filter((task) => task.id !== selectedTask),
     }));
+    localStorage.setItem("@stellarjetz_boards", JSON.stringify(newBoardData));
+
     setBoardData(newBoardData);
   };
 
   return (
-    <main className="pl-32 pt-16">
+    <main className="pl-12 md:pl-32 pt-16">
       <div className="p-10">
         <div className="flex justify-between">
-          <div className="flex items-center">
-            <h4 className="text-4xl font-bold text-gray-600">
+          <div className="flex flex-row items-center">
+            <h4 className="text-xl md:text-4xl w-6/12 md:w-max font-bold text-gray-600">
               Quadro StellarJetz
             </h4>
-            <button className="w-9 h-9 ml-5">
+            <button className="w-9 h-9 ml-3 md:ml-5">
               <ArrowsUpDownIcon className="text-gray-500 rounded-full p-2 bg-white shadow-xl" />
             </button>
           </div>
@@ -150,10 +160,10 @@ export default function Home() {
         {/* Colunas Do Quadro */}
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="grid grid-cols-4 gap-5 my-5">
+            <div className="flex overflow-x-auto  gap-5 my-5">
               {boardData.map((board, Bindex) => {
                 return (
-                  <div key={board.boardName}>
+                  <div key={board.boardName} className="flex-grow flex-basis-0 min-w-[250px]">
                     <Droppable droppableId={Bindex.toString()}>
                       {(provided, snapshot) => (
                         <div
@@ -162,7 +172,7 @@ export default function Home() {
                         >
                           <div
                             className={`bg-gray-100 rounded-md shadow-md
-                            flex flex-col relative overflow-hidden p-3
+                            flex flex-col  relative  p-3
                             ${snapshot.isDraggingOver && "bg-purple-200"}`}
                           >
                             <span className="w-full h-1 bg-gradient-to-r from-purple-700 to-purple-400 absolute inset-x-0 top-0"></span>
@@ -173,18 +183,24 @@ export default function Home() {
                               <EllipsisHorizontalIcon className="w-5 h-5 text-gray-500" />
                             </h4>
 
-                            {board.items.length > 0 &&
-                              board.items.map((task, index) => {
-                                return (
-                                  <CardItem
-                                    droptask={dropTask}
-                                    data={task}
-                                    index={index}
-                                    key={task.id}
-                                  />
-                                );
-                              })}
-                            {provided.placeholder}
+                            <div
+                              className="overflow-y-auto overflow-x-hidden h-auto"
+                              style={{ maxHeight: "calc(100vh - 290px)" }}
+                            >
+                              {board.items.length > 0 &&
+                                board.items.map((task, index) => {
+                                  return (
+                                    <CardItem
+                                      droptask={dropTask}
+                                      data={task}
+                                      index={index}
+                                      key={task.id}
+                                    />
+                                  );
+                                })}
+                              {provided.placeholder}
+                            </div>
+
                             <button
                               onClick={() => {
                                 setSelectedBoard(Bindex);
@@ -200,9 +216,9 @@ export default function Home() {
                                 <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                                   <div className="relative w-2/6 my-6 mx-auto max-w-3xl">
                                     <div className="border-solid border-2 border-purple-200 rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                      <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                                        <h4 className="flex justify-between items-center mb-2">
-                                          <span className="text-2xl text-gray-600">
+                                      <div className="flex items-start justify-between p-5 border-b border-solid border-purple-300 rounded-t ">
+                                        <h4 className="flex justify-between items-center">
+                                          <span className="p-1 text-2xl text-gray-600">
                                             Nova Tarefa
                                           </span>
                                         </h4>
@@ -216,7 +232,7 @@ export default function Home() {
                                       <div className="relative p-6 flex-auto">
                                         <form
                                           onSubmit={handleSubmit(onSubmit)}
-                                          className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full"
+                                          className="bg-purple-100 shadow-md rounded px-3 pt-3 pb-3 w-full"
                                         >
                                           <label className="block text-black text-sm font-bold mb-1">
                                             Título
@@ -225,11 +241,26 @@ export default function Home() {
                                             {...register("titulo", {
                                               required: true,
                                             })}
-                                            className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                                            className="shadow appearance-none border rounded w-full py-2 px-1 mb-2 text-black"
                                           />
                                           {errors.titulo && (
                                             <span className="text-red-700">
                                               O título é obrigatório
+                                            </span>
+                                          )}
+                                          <label className="block text-black text-sm font-bold mb-1">
+                                            Etiqueta
+                                          </label>
+                                          <input
+                                            {...register("etiqueta", {
+                                              required: true,
+                                            })}
+                                            maxLength={10}
+                                            className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                                          />
+                                          {errors.etiqueta && (
+                                            <span className="text-red-700">
+                                              A etiqueta é obrigatório
                                             </span>
                                           )}
                                         </form>
