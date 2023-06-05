@@ -3,7 +3,7 @@ import TopBar from './components/TopBar'
 import './globals.css'
 
 export const metadata = {
-  title: 'Quadro Kanban',
+  title: 'Quadro Kanban | Santana Developer',
   description: 'Quadro Kanban criado com Next.JS',
 }
 
