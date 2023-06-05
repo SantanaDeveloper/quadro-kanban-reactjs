@@ -119,11 +119,11 @@ export default function Home() {
   };
 
   return (
-    <main className="pl-12 md:pl-32 pt-16">
-      <div className="p-10">
-        <div className="flex justify-between">
+    <main className="pl-12 md:pl-32 pt-10 md:pt-16">
+      <div className="pt-10 pb-0 px-7">
+        <div className="flex justify-between mb-4">
           <div className="flex flex-row items-center">
-            <h4 className="text-xl md:text-4xl w-6/12 md:w-max font-bold text-gray-600">
+            <h4 className="text-lg md:text-4xl w-6/12 md:w-max font-bold text-gray-600">
               Quadro StellarJetz
             </h4>
             <button className="w-9 h-9 ml-3 md:ml-5">
@@ -160,7 +160,7 @@ export default function Home() {
         {/* Colunas Do Quadro */}
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex overflow-x-auto  gap-5 my-5">
+            <div className="flex overflow-x-auto overflow-y-hidden h-[calc(100vh-160px)] gap-5">
               {boardData.map((board, Bindex) => {
                 return (
                   <div key={board.boardName} className="flex-grow flex-basis-0 min-w-[250px]">
@@ -213,8 +213,8 @@ export default function Home() {
                             </button>
                             {showModal && selectedBoard === Bindex ? (
                               <>
-                                <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                                  <div className="relative w-2/6 my-6 mx-auto max-w-3xl">
+                                <div className="flex fixed justify-center items-center overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-10/12 md:w-2/6 my-6 mx-auto max-w-3xl">
                                     <div className="border-solid border-2 border-purple-200 rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                       <div className="flex items-start justify-between p-5 border-b border-solid border-purple-300 rounded-t ">
                                         <h4 className="flex justify-between items-center">
