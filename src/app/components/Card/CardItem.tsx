@@ -38,9 +38,9 @@ function CardItem({ data, droptask, index }: TaskProps) {
           className="bg-white rounded-md p-3 mt-3 mr-3 border-solid border-2 border-purple-200 shadow-md"
         >
           <div className="flex justify-between">
-            <label className="bg-purple-700 px-2 py-1 rounded text-white text-sm">
+            <span className="bg-purple-700 px-2 py-1 rounded text-white text-sm">
               {label}
-            </label>
+            </span>
             <div className="group relative flex justify-center">
               <button onClick={() => droptask(id)}>
               <TrashIcon className="w-5 h-5 text-gray-500" />

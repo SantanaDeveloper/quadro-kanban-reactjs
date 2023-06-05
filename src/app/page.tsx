@@ -163,7 +163,10 @@ export default function Home() {
             <div className="flex overflow-x-auto overflow-y-hidden h-[calc(100vh-160px)] gap-5">
               {boardData.map((board, Bindex) => {
                 return (
-                  <div key={board.boardName} className="flex-grow flex-basis-0 min-w-[250px]">
+                  <div
+                    key={board.boardName}
+                    className="flex-grow flex-basis-0 min-w-[250px]"
+                  >
                     <Droppable droppableId={Bindex.toString()}>
                       {(provided, snapshot) => (
                         <div
@@ -236,33 +239,34 @@ export default function Home() {
                                         >
                                           <label className="block text-black text-sm font-bold mb-1">
                                             Título
+                                            <input
+                                              {...register("titulo", {
+                                                required: true,
+                                              })}
+                                              className="shadow appearance-none border rounded w-full py-2 px-1 mb-2 text-black"
+                                            />
+                                            {errors.titulo && (
+                                              <span className="text-red-700">
+                                                O título é obrigatório
+                                              </span>
+                                            )}
                                           </label>
-                                          <input
-                                            {...register("titulo", {
-                                              required: true,
-                                            })}
-                                            className="shadow appearance-none border rounded w-full py-2 px-1 mb-2 text-black"
-                                          />
-                                          {errors.titulo && (
-                                            <span className="text-red-700">
-                                              O título é obrigatório
-                                            </span>
-                                          )}
+
                                           <label className="block text-black text-sm font-bold mb-1">
                                             Etiqueta
+                                            <input
+                                              {...register("etiqueta", {
+                                                required: true,
+                                              })}
+                                              maxLength={10}
+                                              className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                                            />
+                                            {errors.etiqueta && (
+                                              <span className="text-red-700">
+                                                A etiqueta é obrigatório
+                                              </span>
+                                            )}
                                           </label>
-                                          <input
-                                            {...register("etiqueta", {
-                                              required: true,
-                                            })}
-                                            maxLength={10}
-                                            className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
-                                          />
-                                          {errors.etiqueta && (
-                                            <span className="text-red-700">
-                                              A etiqueta é obrigatório
-                                            </span>
-                                          )}
                                         </form>
                                       </div>
                                       <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
