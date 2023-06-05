@@ -5,6 +5,7 @@ import './globals.css'
 export const metadata = {
   title: 'Quadro Kanban | Santana Developer',
   description: 'Quadro Kanban criado com Next.JS',
+  themeColor: '#9333ea'
 }
 
 export default function RootLayout({
