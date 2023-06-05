@@ -4,7 +4,7 @@ import { PresentationChartBarIcon , UserGroupIcon, RectangleGroupIcon, CalendarD
 
 const Sidebar = () => {
     return (
-        <div className='fixed inset-y-0 left-0 bg-white w-16 md:w-32'>
+        <div className='fixed inset-y-0 left-0 bg-white w-16 md:w-32 z-50'>
             <h1 className='flex items-center justify-center text-sm md:text-2xl h-16 bg-purple-600 text-white font-bold'>Santana</h1>
             <ul className='flex flex-col text-base h-full shadow-xl'>
                 <li className='flex justify-center items-center flex-col py-7 text-gray-500'>

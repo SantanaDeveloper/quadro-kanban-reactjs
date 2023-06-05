@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon, BellAlertIcon, LanguageIcon } from "@heroicons/rea
 
 const TopBar = () => {
     return (
-        <div className='h-16 pl-16 md:pl-32 fixed bg-purple-600 w-full flex items-center justify-between pr-5 shadow-xl'>
+        <div className='h-16 pl-16 md:pl-32 fixed bg-purple-600 w-full flex items-center justify-between pr-5 shadow-xl z-50'>
             <div className='flex px-5 items-center'>
                 <MagnifyingGlassIcon className='w-5 h-5 text-white' />
                 <input className="bg-transparent border-0 text-white placeholder-gray-200 w-28
