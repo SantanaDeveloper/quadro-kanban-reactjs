@@ -15,8 +15,6 @@ import MockUsers from "../data/mock-users.json";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-
-
 export default function Home() {
   const [ready, setReady] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -25,19 +23,23 @@ export default function Home() {
 
   useEffect(() => {
     // Perform localStorage action
-    const boards = localStorage.getItem('@stellarjetz_boards')
-    if(boards){
-      console.log("Entrou")
-      setBoardData(JSON.parse(boards))
+    const boards = localStorage.getItem("@stellarjetz_boards");
+    if (boards) {
+      console.log("Entrou");
+      setBoardData(JSON.parse(boards));
     } else {
-      localStorage.setItem('@stellarjetz_boards', "")
-      console.log("No Entrou")
-
+      localStorage.setItem("@stellarjetz_boards", "");
+      console.log("No Entrou");
     }
-  }, [])
+  }, []);
 
   //State do modal de inclusão de tasks
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data: any) => {
     const item = {
       id: createGuidId(),
@@ -45,16 +47,16 @@ export default function Home() {
       label: "Novo",
       messages: [],
       attachments: 0,
-      members: []
-    }
+      members: [],
+    };
 
     let newBoardData = boardData;
 
     newBoardData[selectedBoard].items.push(item);
     setBoardData(newBoardData);
-    setShowModal(false)
-    reset()
-  }
+    setShowModal(false);
+    reset();
+  };
 
   useEffect(() => {
     if (process.browser) {
@@ -63,10 +65,14 @@ export default function Home() {
   }, []);
 
   function createGuidId() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
   }
 
   /**
@@ -149,91 +155,107 @@ export default function Home() {
                 return (
                   <div key={board.boardName}>
                     <Droppable droppableId={Bindex.toString()}>
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <div
-                          key={Bindex}
                           {...provided.droppableProps}
                           ref={provided.innerRef}
-                          className="bg-gray-100 p-3 rounded-md shadow-md flex flex-col relative overflow-hidden"
                         >
-                          <span className="w-full h-1 bg-gradient-to-r from-purple-700 to-purple-400 absolute inset-x-0 top-0"></span>
-                          <h4 className="flex justify-between items-center mb-2">
-                            <span className="text-2xl text-gray-600">
-                              {board.boardName}
-                            </span>
-                            <EllipsisHorizontalIcon className="w-5 h-5 text-gray-500" />
-                          </h4>
-
-                          {board.items.length > 0 &&
-                            board.items.map((task, index) => {
-                              return (
-                                <CardItem
-                                  droptask={dropTask}
-                                  data={task}
-                                  index={index}
-                                  key={task.id}
-                                />
-                              );
-                            })}
-                          {provided.placeholder}
-                          <button
-                            onClick={() => {
-                              setSelectedBoard(Bindex);
-                              setShowModal(true);
-                            }}
-                            className="flex justify-start items-center mt-6 space-x-2 text-lg"
+                          <div
+                            className={`bg-gray-100 rounded-md shadow-md
+                            flex flex-col relative overflow-hidden p-3
+                            ${snapshot.isDraggingOver && "bg-purple-200"}`}
                           >
-                            <PlusCircleIcon className="w-5 h-5 text-gray-500" />
-                            <span>Adicionar Tarefa</span>
-                          </button>
-                          {showModal && selectedBoard === Bindex ? (
-                            <>
-                              <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                                <div className="relative w-2/6 my-6 mx-auto max-w-3xl">
-                                  <div className="border-solid border-2 border-purple-200 rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                    <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                                      <h4 className="flex justify-between items-center mb-2">
-                                        <span className="text-2xl text-gray-600">
-                                          Nova Tarefa
-                                        </span>
-                                      </h4>
-                                      <button
-                                        className="bg-transparent border-0 text-black float-right"
-                                        onClick={() => setShowModal(false)}
-                                      >
-                                        <XMarkIcon className="w-5 h-5 text-gray-500" />
-                                      </button>
-                                    </div>
-                                    <div className="relative p-6 flex-auto">
-                                      <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full">
-                                        <label className="block text-black text-sm font-bold mb-1">
-                                          Título
-                                        </label>
-                                        <input {...register("titulo", { required: true })} className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
-                                        {errors.titulo && <span className="text-red-700">O título é obrigatório</span>}
-                                      </form>
-                                    </div>
-                                    <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                                      <button
-                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                                        type="button"
-                                        onClick={() => setShowModal(false)}
-                                      >
-                                        Cancelar
-                                      </button>
-                                      <button
-                                        className="text-white bg-purple-600 active:bg-purple-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                                        type="button"
-                                        onClick={handleSubmit(onSubmit)}
-                                      >
-                                        Adicionar
-                                      </button>
+                            <span className="w-full h-1 bg-gradient-to-r from-purple-700 to-purple-400 absolute inset-x-0 top-0"></span>
+                            <h4 className="flex justify-between items-center mb-2">
+                              <span className="text-2xl text-gray-600">
+                                {board.boardName}
+                              </span>
+                              <EllipsisHorizontalIcon className="w-5 h-5 text-gray-500" />
+                            </h4>
+
+                            {board.items.length > 0 &&
+                              board.items.map((task, index) => {
+                                return (
+                                  <CardItem
+                                    droptask={dropTask}
+                                    data={task}
+                                    index={index}
+                                    key={task.id}
+                                  />
+                                );
+                              })}
+                            {provided.placeholder}
+                            <button
+                              onClick={() => {
+                                setSelectedBoard(Bindex);
+                                setShowModal(true);
+                              }}
+                              className="flex justify-start items-center mt-6 space-x-2 text-lg"
+                            >
+                              <PlusCircleIcon className="w-5 h-5 text-gray-500" />
+                              <span>Adicionar Tarefa</span>
+                            </button>
+                            {showModal && selectedBoard === Bindex ? (
+                              <>
+                                <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-2/6 my-6 mx-auto max-w-3xl">
+                                    <div className="border-solid border-2 border-purple-200 rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+                                        <h4 className="flex justify-between items-center mb-2">
+                                          <span className="text-2xl text-gray-600">
+                                            Nova Tarefa
+                                          </span>
+                                        </h4>
+                                        <button
+                                          className="bg-transparent border-0 text-black float-right"
+                                          onClick={() => setShowModal(false)}
+                                        >
+                                          <XMarkIcon className="w-5 h-5 text-gray-500" />
+                                        </button>
+                                      </div>
+                                      <div className="relative p-6 flex-auto">
+                                        <form
+                                          onSubmit={handleSubmit(onSubmit)}
+                                          className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full"
+                                        >
+                                          <label className="block text-black text-sm font-bold mb-1">
+                                            Título
+                                          </label>
+                                          <input
+                                            {...register("titulo", {
+                                              required: true,
+                                            })}
+                                            className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                                          />
+                                          {errors.titulo && (
+                                            <span className="text-red-700">
+                                              O título é obrigatório
+                                            </span>
+                                          )}
+                                        </form>
+                                      </div>
+                                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                        <button
+                                          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                                          type="button"
+                                          onClick={() => setShowModal(false)}
+                                        >
+                                          Cancelar
+                                        </button>
+                                        <button
+                                          className="text-white bg-purple-600 active:bg-purple-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                                          type="button"
+                                          onClick={handleSubmit(onSubmit)}
+                                        >
+                                          Adicionar
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </>
-                          ) : null}
+                              </>
+                            ) : null}
+                          </div>
                         </div>
                       )}
                     </Droppable>

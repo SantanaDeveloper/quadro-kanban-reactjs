@@ -1,34 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+1. **Passo: Criar um projeto Next.js com Tailwind CSS e ESLint:**
+   - Comando: `npx create-next-app@latest quadro-kanban-reactjs --typescript --eslint`
 
-## Getting Started
+2. **Passo: Limpar os estilos CSS padrões**
 
-First, run the development server:
+3. **Passo: Criar a pasta "components" dentro de "src"**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+4. **Passo: Criar os componentes "TopBar" e "Sidebar" na pasta "components" dentro de "src"**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. **Passo: Estilizar basicamente os componentes**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+6. **Passo: Instalar a biblioteca de ícones a ser usada:**
+   - Comando: `npm install @heroicons/react`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+7. **Passo: Estilizar os componentes "TopBar" e "Sidebar"**
 
-## Learn More
+8. **Passo: Instalar o "@tailwindcss/forms" em modo de desenvolvimento:**
+   - Comando: `npm install -D @tailwindcss/forms`
 
-To learn more about Next.js, take a look at the following resources:
+9. **Passo: Estilizar o "TopBar":**
+   - Criar área de busca
+   - Criar ícone de Notificações
+   - Exibir nome e foto do usuário logado
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+10. **Passo: Arrumar erro de host de imagens no Next.js**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+11. **Passo: Estilizar a página dos quadros:**
+    - Criar display e select do quadro atual
+    - Exibir membros do quadro em tela
 
-## Deploy on Vercel
+12. **Passo: Estilizar o componente de coluna do quadro**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+13. **Passo: Criar Dados Mockados**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+14. **Passo: Passar os dados Mockados para os componentes**
+
+15. **Passo: Incluir botão "Nova Task"**
+
+16. **Passo: Instalar a biblioteca de "drag and drop":**
+    - Comando: `npm install react-beautiful-dnd --save`
+    - Comando: `npm i --save-dev @types/react-beautiful-dnd`
+
+17. **Passo: Implementar o recurso de "drag and drop"**
+
+18. **Passo: Implementar modal de inclusão de tarefa:**
+    - Instalar o "React Hook Form"
+    - Comando: `npm install react-hook-form`
+
+19. **Passo: Implementar "delete task"**
+
+20. **Passo: Salvar dados no localStorage**
+
+21. **Passo: Deploy no Vercel**
+
+Lembre-se de utilizar os comandos fornecidos e seguir a sequência dos passos para obter o resultado desejado.
