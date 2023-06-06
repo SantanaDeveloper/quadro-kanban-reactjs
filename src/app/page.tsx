@@ -120,7 +120,7 @@ export default function Home() {
 
   return (
     <main className="md:pl-32 ">
-      <div className="md:pt-10 pb-0 px-5">
+      <div className="md:pt-3 pb-0 px-5">
         <div className="flex justify-between mb-4">
           <div className="flex flex-row items-center">
             <h4 className="text-lg md:text-4xl w-full md:w-max font-bold text-gray-600">
@@ -184,7 +184,7 @@ export default function Home() {
                             </h4>
 
                             <div
-                              className="overflow-y-auto overflow-x-hidden h-[58vh] md:h-[70vh] "
+                              className="overflow-y-auto overflow-x-hidden h-[58vh] md:h-[68vh] "
                             >
                               {board.items.length > 0 &&
                                 board.items.map((task, index) => {
