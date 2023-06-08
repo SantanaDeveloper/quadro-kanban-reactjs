@@ -162,7 +162,7 @@ export default function Home() {
                 return (
                   <div
                     key={board.boardName}
-                    className="w-full"
+                    className="w-full min-w-max"
                   >
                     <Droppable droppableId={Bindex.toString()}>
                       {(provided, snapshot) => (
@@ -171,8 +171,7 @@ export default function Home() {
                           ref={provided.innerRef}
                         >
                           <div
-                            className={`bg-gray-100 rounded-md shadow-md
-                            flex flex-col  relative  p-3
+                            className={`max-w-xs md:max-w-md bg-gray-100 rounded-md shadow-md flex flex-col relative p-3
                             ${snapshot.isDraggingOver && "bg-purple-200"}`}
                           >
                             <span className="w-full h-1 bg-gradient-to-r from-purple-700 to-purple-400 absolute inset-x-0 top-0"></span>
@@ -184,7 +183,7 @@ export default function Home() {
                             </h4>
 
                             <div
-                              className="overflow-y-auto overflow-x-hidden h-[58vh] md:h-[68vh] "
+                              className="overflow-y-auto overflow-x-hidden h-[58vh] md:h-[70vh] "
                             >
                               {board.items.length > 0 &&
                                 board.items.map((task, index) => {
