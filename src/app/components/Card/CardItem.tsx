@@ -35,7 +35,7 @@ function CardItem({ data, droptask, index }: TaskProps) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="bg-white rounded-md p-3 mt-3 mr-3 border-solid border-2 border-purple-200 shadow-md"
+          className="bg-white rounded-md p-3 mt-3 border-solid border-2 border-purple-200 shadow-md"
         >
           <div className="flex justify-between">
             <span className="bg-purple-700 px-2 py-1 rounded text-white text-sm">

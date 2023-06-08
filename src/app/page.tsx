@@ -162,7 +162,7 @@ export default function Home() {
                 return (
                   <div
                     key={board.boardName}
-                    className="flex-grow flex-basis-0 min-w-[250px]"
+                    className="w-full"
                   >
                     <Droppable droppableId={Bindex.toString()}>
                       {(provided, snapshot) => (
