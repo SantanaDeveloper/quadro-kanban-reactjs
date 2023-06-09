@@ -5,7 +5,7 @@
             {
                 "id": "b1608c46-6368-4407-8834-fcc806113701",
                 "label": "FrontEnd",
-                "title": "Crie um formulário de registro de usuário com os campos nome, e-mail e senha",
+                "title": "Crie um formulário de registro de usuário",
                 "messages": [
                     "Oi"
                 ],
